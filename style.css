@@ -1,0 +1,12 @@
+
+
+label {
+display: table;
+}
+
+label div {
+display: table-cell;
+vertical-align: middle;
+}
+
+

@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">   
+        <title>Odontograma</title>
+        <link rel="stylesheet" href="style.css">
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+        <style>       
+            canvas + canvas {
+                margin-left: 4px;
+            }
+            /*label + canvas{
+            display: inline-block;
+            vertical-align: middle;
+            }*/
+            label + #vestibulares1APiece{
+                display: inline-block;
+                vertical-align: middle;
+            }
+            label + #vestibulares2APiece{
+                display: inline-block;
+                vertical-align: middle;
+            }
+            label + #vestibulares1BPiece{
+                display: inline-block;
+                vertical-align: middle;
+            }
+            label + #vestibulares2BPiece{
+                display: inline-block;
+                vertical-align: middle;
+            }
+            label + #lingualAPiece{
+                display: inline-block;
+                vertical-align: middle;
+            }
+            label + #lingualBPiece{
+                display: inline-block;
+                vertical-align: middle;
+            }
+            /*label + canvas + canvas + canvas + canvas + canvas + canvas + canvas + canvas {
+            display: inline-block;
+            vertical-align: middle;
+            }*/
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <script type="text/javascript" src="logicaOdontograma.js"></script>
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-xs-12 col-sm-12">
+                    <h1>Odontograma</h1>
+                    <p style="padding:5px;"></p>
+                    <p>-Pintar con azul para tratamiento realizado -Rojo para patologia actual -Movilidad y recesion: marcar X (1,2,3) si aplica!</p>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+
+                    <div class="col-xs-12 col-sm-12">
+
+                        <div class="col-xs-12 col-sm-12">
+                            <label style="display:inline-block;padding-bottom:10px;padding-top:10px">Simbologia&nbsp</label>
+                        </div>
+
+                        <div id="divPallete" class="col-xs-12 col-sm-3">
+                            <canvas id="redSealantPallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer" >
+                            </canvas>
+                            <label id="redSealantLabelPallete" for="redSealantPallete" style="display:inline-block">Sellante Necesario</label>
+                            <script>
+                                var c=document.getElementById("redSealantPallete");
+                                var ctx=c.getContext("2d");
+                                ctx.moveTo(8.5,5);
+                                ctx.lineTo(25.5,15);
+
+                                ctx.moveTo(25.5,5);
+                                ctx.lineTo(8.5,15);
+
+                                ctx.moveTo(7,10);
+                                ctx.lineTo(27,10);
+
+                                ctx.moveTo(17,0);
+                                ctx.lineTo(17,20);
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#ff0000';
+                                ctx.stroke();
+                            </script>
+                            <br>
+                            <canvas id="blueSealantPallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="blueSealantLabelPallete" for="blueSealantPallete" style="display:inline-block">Sellante Realizado</label>
+                            <script>
+                                var c=document.getElementById("blueSealantPallete");
+                                var ctx=c.getContext("2d");
+                                ctx.moveTo(8.5,5);
+                                ctx.lineTo(25.5,15);
+
+                                ctx.moveTo(25.5,5);
+                                ctx.lineTo(8.5,15);
+
+                                ctx.moveTo(7,10);
+                                ctx.lineTo(27,10);;
+
+                                ctx.moveTo(17,0);
+                                ctx.lineTo(17,20);
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#2E2EFE';
+                                ctx.stroke();
+                            </script> 
+                            <br>
+                            <canvas id="redExtractionPallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="redExtractionLabelPallete" for="redExtractionPallete" style="display:inline-block">Extraccion Indicada</label>
+                            <script>
+                                var c=document.getElementById("redExtractionPallete");
+                                var ctx=c.getContext("2d");
+                                ctx.moveTo(8.5,5);
+                                ctx.lineTo(25.5,15);
+
+                                ctx.moveTo(25.5,5);
+                                ctx.lineTo(8.5,15);
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#ff0000';
+                                ctx.stroke();
+                            </script> 
+                            <br>
+                            <canvas id="blueExtractionPallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="blueExtractionLabelPallete" for="blueExtractionPallete" style="display:inline-block">Perdida por Caries</label>
+                            <script>
+                                var c=document.getElementById("blueExtractionPallete");
+                                var ctx=c.getContext("2d");
+                                ctx.moveTo(8.5,5);
+                                ctx.lineTo(25.5,15);
+
+                                ctx.moveTo(25.5,5);
+                                ctx.lineTo(8.5,15);
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#2E2EFE';
+                                ctx.stroke();
+                            </script>
+                            <br>
+                            <canvas id="redWastePallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="redWasteLabelPallete" for="redWastePallete" style="display:inline-block">Perdida (Otra Causa)</label>
+                            <script>
+                                var c=document.getElementById("redWastePallete");
+                                var ctx=c.getContext("2d");
+                                ctx.beginPath();
+                                ctx.arc(17, 12, 8, 0, Math.PI)
+
+                                ctx.moveTo(9,0);
+                                ctx.lineTo(9,12);
+                                ctx.moveTo(25,0);
+                                ctx.lineTo(25,12);
+
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#ff0000';
+                                ctx.stroke();
+                            </script>
+                            <br>
+                            <canvas id="blueWastePallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="blueWasteLabelPallete" for="blueWastePallete" style="display:inline-block">Perdida (Otra Causa)</label>
+                            <script>
+                                var c=document.getElementById("blueWastePallete");
+                                var ctx=c.getContext("2d");
+                                ctx.beginPath();
+                                ctx.arc(17, 12, 8, 0, Math.PI)
+
+                                ctx.moveTo(9,0);
+                                ctx.lineTo(9,12);
+                                ctx.moveTo(25,0);
+                                ctx.lineTo(25,12);
+
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#2E2EFE';
+                                ctx.stroke();
+                            </script>
+                            <br>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-3">
+
+                            <canvas id="redEndodonticsPallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="redEndodonticsLabelPallete" for="redEndodonticsPallete" style="display:inline-block">Endodoncia</label>
+                            <script>
+                                var c=document.getElementById("redEndodonticsPallete");
+                                var ctx=c.getContext("2d");
+                                ctx.moveTo(17,0);
+                                ctx.lineTo(9,20);
+
+                                ctx.moveTo(9,20);
+                                ctx.lineTo(26,20);
+
+                                ctx.moveTo(17,0);
+                                ctx.lineTo(26,20);
+
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#ff0000';
+                                ctx.stroke();
+                            </script> 
+                            <br>
+                            <canvas id="blueEndodonticsPallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="blueEndodonticsLabelPallete" for="blueEndodonticsPallete" style="display:inline-block">Endodoncia</label>
+                            <script>
+                                var c=document.getElementById("blueEndodonticsPallete");
+                                var ctx=c.getContext("2d");
+                                ctx.moveTo(17,0);
+                                ctx.lineTo(9,20);
+
+                                ctx.moveTo(9,20);
+                                ctx.lineTo(26,20);
+
+                                ctx.moveTo(17,0);
+                                ctx.lineTo(26,20);
+
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#2E2EFE';
+                                ctx.stroke();
+                            </script> 
+                            <br>
+                            <canvas id="redProtesisFijaPallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="redProtesisFijaLabelPallete" for="redProtesisFijaPallete" style="display:inline-block">Protesis Fija</label>
+                            <script>
+                                var c=document.getElementById("redProtesisFijaPallete");
+                                var ctx=c.getContext("2d");
+
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#ff0000';
+                                ctx.moveTo(6,10);
+                                ctx.lineTo(28,10);
+                                ctx.stroke();
+
+                            </script> 
+                            <br>
+                            <canvas id="blueProtesisFijaPallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="blueProtesisFijaLabelPallete" for="blueProtesisFijaPallete" style="display:inline-block">Protesis Fija</label>
+                            <script>
+                                var c=document.getElementById("blueProtesisFijaPallete");
+                                var ctx=c.getContext("2d");
+
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#2E2EFE';
+                                ctx.moveTo(6,10);
+                                ctx.lineTo(28,10);
+                                ctx.stroke();
+
+                            </script> 
+                            <br>
+                            <canvas id="redProtesisRemoviblePallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="redProtesisRemovibleLabelPallete" for="redProtesisRemoviblePallete" style="display:inline-block">Protesis Removible</label>
+                            <script>
+                                var c=document.getElementById("redProtesisRemoviblePallete");
+                                var ctx=c.getContext("2d");
+
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#ff0000';
+                                ctx.moveTo(8,6);
+                                ctx.lineTo(8,14);
+                                ctx.moveTo(26,6);
+                                ctx.lineTo(26,14);
+                                ctx.moveTo(8,10);
+                                ctx.lineTo(26,10);
+                                ctx.stroke();
+
+                            </script>
+                            <br>
+                            <canvas id="blueProtesisRemoviblePallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="blueProtesisRemovibleLabelPallete" for="blueProtesisRemoviblePallete" style="display:inline-block">Protesis Removible</label>
+                            <script>
+                                var c=document.getElementById("blueProtesisRemoviblePallete");
+                                var ctx=c.getContext("2d");
+
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#2E2EFE';
+                                ctx.moveTo(8,6);
+                                ctx.lineTo(8,14);
+                                ctx.moveTo(26,6);
+                                ctx.lineTo(26,14);
+
+                                ctx.moveTo(8,10);
+                                ctx.lineTo(26,10);
+                                ctx.stroke();
+
+                            </script>
+
+                        </div>
+
+                        <div class="col-xs-12 col-sm-3">
+                            <canvas id="redProtesisTotalPallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="redProtesisTotalLabelPallete" for="redProtesisTotalPallete" style="display:inline-block">Protesis Total</label>
+                            <script>
+                                var c=document.getElementById("redProtesisTotalPallete");
+                                var ctx=c.getContext("2d");
+                                ctx.moveTo(6,6);
+                                ctx.lineTo(28,6);
+
+                                ctx.moveTo(6,14);
+                                ctx.lineTo(28,14);
+
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#ff0000';
+                                ctx.stroke();
+                            </script>
+                            <br>
+                            <canvas id="blueProtesisTotalPallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="blueProtesisTotalLabelPallete" for="blueProtesisTotalPallete" style="display:inline-block">Protesis Total</label>
+                            <script>
+                                var c=document.getElementById("blueProtesisTotalPallete");
+                                var ctx=c.getContext("2d");
+                                ctx.moveTo(6,6);
+                                ctx.lineTo(28,6);
+
+                                ctx.moveTo(6,14);
+                                ctx.lineTo(28,14);
+
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#2E2EFE';
+                                ctx.stroke();
+                            </script>
+                            <br>
+                            <canvas id="redCoronaPallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="redCoronaLabelPallete" for="redCoronaPallete" style="display:inline-block">Corona</label>
+                            <script>
+                                var c=document.getElementById("redCoronaPallete");
+                                var ctx=c.getContext("2d");
+                                ctx.beginPath()
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#ff0000';
+                                //ctx.strokeRect(0,0,34,20);
+                                ctx.strokeRect(5,5,24,10); 
+                                ctx.strokeRect(17,10,1,1) 
+                                ctx.stroke();
+                                ctx.closePath()
+                            </script> 
+                            <br>
+                            <canvas id="blueCoronaPallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="blueCoronaLabelPallete" for="blueCoronaPallete" style="display:inline-block">Corona</label>
+                            <script>
+                                var c=document.getElementById("blueCoronaPallete");
+                                var ctx=c.getContext("2d");
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#2E2EFE';
+                                //ctx.strokeRect(0,0,34,20);
+                                ctx.strokeRect(5,5,24,10); 
+                                ctx.strokeRect(17,10,1,1)                  
+
+                                ctx.stroke();
+                            </script> 
+                            <br>
+                            <canvas id="obturadoPallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="obturadoLabelPallete" for="obturadoPallete" style="display:inline-block">Obturado</label>
+                            <script>
+                                var c=document.getElementById("obturadoPallete");
+                                var ctx=c.getContext("2d");
+                                ctx.beginPath();
+                                ctx.arc(17, 10, 10, 0, 2 * Math.PI);
+
+                                //ctx.arc(17, 10, 5, 0, 2 * Math.PI);
+
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#2E2EFE';
+                                ctx.stroke();
+                            </script> 
+                            <br>
+                            <canvas id="cariesPallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="cariesLabelPallete" for="cariesPallete" style="display:inline-block">Caries</label>
+                            <script>
+                                var c=document.getElementById("cariesPallete");
+                                var ctx=c.getContext("2d");
+                                ctx.beginPath();
+                                ctx.arc(17, 10, 10, 0, 2 * Math.PI);
+
+                                //ctx.arc(17, 10, 5, 0, 2 * Math.PI);
+
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#ff0000';
+                                ctx.stroke();
+                            </script>
+                        </div>
+
+
+                        <div class="col-xs-12 col-sm-3">
+                            <canvas id="redImplantePallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="redImplanteLabelPallete" for="redImplantePallete" style="display:inline-block">Implante</label>
+                            <script>
+                                var c=document.getElementById("redImplantePallete");
+                                var ctx=c.getContext("2d");
+                                ctx.beginPath();
+                                ctx.arc(17, 10, 10, 0, 2 * Math.PI)
+
+                                ctx.moveTo(8.5,5);
+                                ctx.lineTo(25.5,15);
+
+                                ctx.moveTo(25.5,5);
+                                ctx.lineTo(8.5,15);
+
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#ff0000';
+                                ctx.stroke();
+                            </script>
+                            <br>
+
+                            <canvas id="blueImplantePallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="blueImplanteLabelPallete" for="blueImplantePallete" style="display:inline-block">Implante</label>
+                            <script>
+                                var c=document.getElementById("blueImplantePallete");
+                                var ctx=c.getContext("2d");
+                                ctx.beginPath();
+                                ctx.arc(17, 10, 10, 0, 2 * Math.PI)
+
+                                ctx.moveTo(8.5,5);
+                                ctx.lineTo(25.5,15);
+
+                                ctx.moveTo(25.5,5);
+                                ctx.lineTo(8.5,15);
+
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#2E2EFE';
+                                ctx.stroke();
+                            </script>
+                            <br>
+                            <canvas id="redPernoPallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="redPernoLabelPallete" for="redPernoPallete" style="display:inline-block">Perno</label>
+                            <script>
+                                var c=document.getElementById("redPernoPallete");
+                                var ctx=c.getContext("2d");
+                                ctx.beginPath();
+                                ctx.arc(17, 10, 10, 0, 2 * Math.PI);
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#ff0000';
+                                ctx.closePath();
+                                ctx.stroke();
+                                ctx.beginPath();
+                                ctx.arc(17, 10, 5, 0, 2 * Math.PI);
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#ff0000';
+                                ctx.stroke();
+                            </script>
+                            <br>
+                            <canvas id="bluePernoPallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <label id="bluePernoLabelPallete" for="bluePernoPallete" style="display:inline-block">Perno</label>
+                            <script>
+                                var c=document.getElementById("bluePernoPallete");
+                                var ctx=c.getContext("2d");
+                                ctx.beginPath();
+                                ctx.arc(17, 10, 10, 0, 2 * Math.PI);
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#2E2EFE';
+                                ctx.closePath();
+                                ctx.stroke();
+                                ctx.beginPath();
+                                ctx.arc(17, 10, 5, 0, 2 * Math.PI);
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#2E2EFE';
+                                ctx.stroke();
+                            </script>
+                            <br>
+                            <label id="recesionMovilidadLabelPallete" for="recesionMovilidad1Pallete" style="display:inline-block">Recision & movilidad</label>
+                            <br>
+                            <canvas id="recesionMovilidad1Pallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <canvas id="recesionMovilidad2Pallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            <canvas id="recesionMovilidad3Pallete" width="34" height="20"
+                                    style="border:1px solid #000000;display:inline-block;cursor: pointer">
+                            </canvas>
+                            
+                            <script>
+                                var c=document.getElementById("recesionMovilidad1Pallete");
+                                var ctx=c.getContext("2d");
+                                ctx.font = "24px sans-serif";
+                                ctx.fillText("1",10,18);
+                                //ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#2E2EFE';
+                                ctx.stroke();
+                                var c=document.getElementById("recesionMovilidad2Pallete");
+                                var ctx=c.getContext("2d");
+                                ctx.font = "24px sans-serif";
+                                ctx.fillText("2",10,18);
+                                //ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#2E2EFE';
+                                ctx.stroke();
+                                var c=document.getElementById("recesionMovilidad3Pallete");
+                                var ctx=c.getContext("2d");
+                                ctx.font = "24px sans-serif";
+                                ctx.fillText("3",10,18);
+                                //ctx.lineWidth = 3;
+                                ctx.strokeStyle = '#2E2EFE';
+                                ctx.stroke();
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <HR>
+                <div class="col-xs-12 col-sm-6">  
+                    <label>Recesion&nbsp&nbsp&nbsp&nbsp</label>  
+                    <canvas id="recesion18Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion17Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion16Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion15Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion14Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion13Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion12Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion11Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <br>
+                    <label for="movilidad18Piece">Movilidad&nbsp&nbsp&nbsp</label>  
+                    <canvas id="movilidad18Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad17Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad16Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad15Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad14Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad13Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad12Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad11Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <br>
+
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp1.8&nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp1.7 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp1.6 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp1.5 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp1.4 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp1.3 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp1.2 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp1.1 &nbsp</label>  
+
+                    <br>
+                    <label for="vestibulares1APiece">Vestibular</label>
+                    <canvas id="vestibulares1APiece" width="410" height="50"
+                            style="border:1px solid #000000;">
+                    </canvas>
+
+                    <br>
+
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp5.5&nbsp</label> 
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp5.4 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp5.3 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp5.2 &nbsp</label>   
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp5.1 &nbsp</label>
+
+                    <br>    
+
+                    <label for="lingualAPiece">Lingual &nbsp&nbsp&nbsp</label>
+                    <canvas id="lingualAPiece" width="350" height="143"
+                            style="border:1px solid #000000;">
+                    </canvas>
+
+                    <br>
+
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp8.5&nbsp</label> 
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp8.4 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp8.3 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp8.2 &nbsp</label>   
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp8.1 &nbsp</label>
+
+                    <br>
+
+                    <label for="vestibulares2APiece">Vestibular</label>
+                    <canvas id="vestibulares2APiece" width="410" height="50"
+                            style="border:1px solid #000000;">
+                    </canvas>
+
+                    <br>
+
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp4.8&nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp4.7 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp4.6 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp4.5 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp4.4 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp4.3 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp4.2 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp4.1 &nbsp</label>
+                    <br>
+
+                    <label for="movilidad48Piece">Movilidad&nbsp&nbsp&nbsp</label>  
+                    <canvas id="movilidad48Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad47Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad46Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad45Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad44Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad43Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad42Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad41Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <br>
+
+                    <label for="recesion48Piece">Recesion&nbsp&nbsp&nbsp&nbsp</label>  
+                    <canvas id="recesion48Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion47Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion46Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion45Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion44Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion43Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion42Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion41Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <br>
+
+                </div>  
+
+
+                <div class="col-xs-12 col-sm-6">
+
+
+                    <label for="recesion21Piece" >Recesion&nbsp&nbsp&nbsp&nbsp</label>  
+                    <canvas id="recesion21Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion22Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion23Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion24Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion25Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion26Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion27Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion28Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <br>
+                    <label for="movilidad21Piece">Movilidad&nbsp&nbsp&nbsp</label>  
+                    <canvas id="movilidad21Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad22Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad23Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad24Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad25Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad26Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad27Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad28Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <br>     
+
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp2.1&nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp2.2 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp2.3 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp2.4 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp2.5 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp2.6 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp2.7 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp2.8 &nbsp</label>
+
+                    <br>
+                    <label for="vestibulares1BPiece">Vestibular</label>
+                    <canvas id="vestibulares1BPiece" width="410" height="50"
+                            style="border:1px solid #000000;">
+                    </canvas>
+
+                    <br>        
+
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp6.1&nbsp</label> 
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp6.2 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp6.3 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp6.4 &nbsp</label>   
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp6.5 &nbsp</label>    
+
+                    <br>    
+
+                    <label for="lingualBPiece">Lingual &nbsp&nbsp&nbsp</label>
+                    <canvas id="lingualBPiece" width="350" height="143"
+                            style="border:1px solid #000000;">
+                    </canvas>
+
+                    <br>
+
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp7.1&nbsp</label> 
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp7.2 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp7.3 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp7.4 &nbsp</label>   
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp7.5 &nbsp</label>  
+
+                    <br>
+
+                    <label for="vestibulares2BPiece">Vestibular</label>
+                    <canvas id="vestibulares2BPiece" width="410" height="50"
+                            style="border:1px solid #000000;">
+                    </canvas>
+
+                    <br>
+
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp3.1&nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp3.2 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp3.3 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp3.4 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp3.5 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp&nbsp3.6 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp3.7 &nbsp</label>  
+                    <label>&nbsp&nbsp&nbsp&nbsp3.8 &nbsp</label> 
+
+                    <br>
+
+                    <label for="movilidad31Piece">Movilidad&nbsp&nbsp&nbsp</label>  
+                    <canvas id="movilidad31Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad32Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad33Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad34Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad35Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad36Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad37Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="movilidad38Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <br>
+
+                    <label for="recesion31Piece">Recesion&nbsp&nbsp&nbsp&nbsp</label>  
+                    <canvas id="recesion31Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion32Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion33Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion34Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion35Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion36Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion37Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <canvas id="recesion38Piece" width="40" height="20"
+                            style="border:1px solid #000000;">
+                    </canvas>
+                    <br>
+
+                </div>  
+                </div>
+
+
+            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <!-- Include all compiled plugins (below), or include individual files as needed -->
+            <script src="js/bootstrap.min.js"></script>
+            </body>    
+        <script type="text/javascript" src="funcionesOdontograma.js"></script>
+
+        </html>
